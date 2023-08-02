@@ -176,12 +176,8 @@ NUMBER_OF_TEMPLATES = 6
 global score_set_list                # Stores the ssim score set of each feature
 global best_extracted_img_list       # Stores the extracted image with highest SSIM score for each feature
 global avg_ssim_list                 # Stores the avg ssim value for each feature
-global left_BL_result
 
-left_BL_result = []
-right_BL_result = []
-result_list = []
-number_panel_result = []
+
 score_set_list = []               # Stores the ssim score set of each feature
 best_extracted_img_list = []      # Stores the extracted image with highest SSIM score for each feature
 avg_ssim_list = []                # Stores the avg ssim value for each feature
@@ -206,9 +202,9 @@ def testing_500():
 
     def preprocessing():
         # Showing original currency note
-        # plt.imshow(gray_test_image, 'gray')
-        # plt.title('Input image after pre- processing')
-        # plt.show()
+        plt.imshow(gray_test_image, 'gray')
+        plt.title('Input image after pre- processing')
+        plt.show()
         progress['value']=5
         ProgressWin.update_idletasks()
 
@@ -231,13 +227,13 @@ def testing_500():
         img2 = cv2.cvtColor(img2, cv2.COLOR_BGR2GRAY)
 
         # Plotting the images
-        # plt.subplot(1, 2, 1)
-        # plt.imshow(img1, 'gray')
+        plt.subplot(1, 2, 1)
+        plt.imshow(img1, 'gray')
 
-        # plt.subplot(1, 2, 2)
-        # plt.imshow(img2, 'gray')
+        plt.subplot(1, 2, 2)
+        plt.imshow(img2, 'gray')
 
-        # plt.show()
+        plt.show()
 
         # Find the SSIM score and return
         score = ssim(img1, img2)
@@ -287,14 +283,8 @@ def testing_500():
         dst_pts  = np.float32([kpts2[m.trainIdx].pt for m in dmatches]).reshape(-1,1,2)
 
         ## find homography matrix and do perspective transform
-
-        if len(dmatches) >= 4:
-            M, mask = cv2.findHomography(src_pts, dst_pts, cv2.RANSAC,5.0)
-        else:
-            print("Not enough matches found to calculate Homography.")
-            M = None
-            mask = None
-            # Additional handling if required
+        
+        M, mask = cv2.findHomography(src_pts, dst_pts, cv2.RANSAC,5.0)
         h,w = template_img.shape[:2]
         pts = np.float32([ [0,0],[0,h-1],[w-1,h-1],[w-1,0] ]).reshape(-1,1,2)
 
@@ -408,19 +398,19 @@ def testing_500():
                 cv2.rectangle(res_img1, (x,y), (x+w, y+h), (0,255,0), 3)
 
                 # Plotting images
-                # plt.rcParams["figure.figsize"] = (16, 16)
-                # plt.subplot(1, 2, 1)p
-                # plt.imshow(res_img2, 'gray')
+                plt.rcParams["figure.figsize"] = (16, 16)
+                plt.subplot(1, 2, 1)
+                plt.imshow(res_img2, 'gray')
 
-                # plt.subplot(1, 2, 2)
-                # plt.imshow(res_img1, 'gray')
-                # #plt.show()
+                plt.subplot(1, 2, 2)
+                plt.imshow(res_img1, 'gray')
+                plt.show()
     
                 # SSIM
                 # Crop out the region inside the green rectangle (matched region)
                 crop_img = blur_test_img[y:y+h, x:x+w]
 
-                # plt.rcParams["figure.figsize"] = (5, 5)
+                plt.rcParams["figure.figsize"] = (5, 5)
                 score = calculateSSIM(template_img_blur, crop_img)
 
                 score_set.append(score)
@@ -439,6 +429,9 @@ def testing_500():
             # Storing necessary data
             score_set_list.append(score_set)
             print('SSIM score set of Feature ' + str(j+1) + ': ', score_set, '\n')
+
+            avg_ssim_list.append(sum(score_set)/len(score_set))
+            print('Average SSIM of Feature ' + str(j+1) + ': ',sum(score_set)/len(score_set),'\n')
         
             if len(score_set) != 0:
                 avg_ssim_list.append(sum(score_set)/len(score_set))
@@ -462,12 +455,16 @@ def testing_500():
         for x in range(len(avg_ssim_list)):
             print('Feature',x+1,':',avg_ssim_list[x])
 
+    left_BL_result = []
+    right_BL_result = []
+    result_list = []
+    number_panel_result = []
+
     # Function to count number of bleed lines in left side- Feature 8
     # Algo 2
 
     def testFeature_8():
-        global left_BL_result 
-        # plt.rcParams["figure.figsize"] = (5, 5)
+        plt.rcParams["figure.figsize"] = (5, 5)
 
         # Check Feature 8- Left bleed lines
         print('\nANALYSIS OF FEATURE 8 : LEFT BLEED LINES\n')
@@ -480,8 +477,8 @@ def testing_500():
     
         _, thresh = cv2.threshold(gray, 130, 255, cv2.THRESH_BINARY)
 
-        # plt.imshow(thresh, 'gray')
-        # plt.show()
+        plt.imshow(thresh, 'gray')
+        plt.show()
 
         whitePixelValue = 255      # White pixel   
         blackPixelValue = 0        # Black pixel
@@ -549,7 +546,7 @@ def testing_500():
         print('\nAverage number of black regions is: ', average_count)
 
         # Storing the thresholded image and average number of bleed lines detected 
-        
+        global left_BL_result
         left_BL_result = [thresh, average_count]
     
         # Updating progess in progress bar
@@ -561,7 +558,7 @@ def testing_500():
     # Function to count number of bleed lines in right side- Feature 9
 
     def testFeature_9():
-        #plt.rcParams["figure.figsize"] = (5, 5)
+        plt.rcParams["figure.figsize"] = (5, 5)
 
         # Check Feature 9- Right bleed lines
         print('\nANALYSIS OF FEATURE 9 : RIGHT BLEED LINES\n')
@@ -575,8 +572,8 @@ def testing_500():
         # Thresholding the image
         _, thresh = cv2.threshold(gray, 130, 255, cv2.THRESH_BINARY)
 
-        #plt.imshow(thresh, 'gray')
-        #plt.show()
+        plt.imshow(thresh, 'gray')
+        plt.show()
 
         whitePixelValue = 255      # White pixel   
         blackPixelValue = 0        # Black pixel
@@ -661,10 +658,10 @@ def testing_500():
     # Algo 3
 
     def testFeature_10():
-        # plt.imshow(crop_bgr)
-        # plt.show()
+        plt.imshow(crop_bgr)
+        plt.show()
 
-        # plt.rcParams["figure.figsize"] = (7, 7)
+        plt.rcParams["figure.figsize"] = (7, 7)
 
         print('\nANALYSIS OF FEATURE 10 : NUMBER PANEL \n')
 
@@ -781,8 +778,8 @@ def testing_500():
 
         if(test_passed):
             print('Test Passed!- 9 characters were detected in the serial number panel.')
-            # plt.imshow(best_img)
-            # plt.show()
+            plt.imshow(best_img)
+            plt.show()
         else:
             print('Test Failed!- 9 characters were NOT detected in the serial number panel.')
 
