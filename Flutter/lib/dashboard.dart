@@ -24,15 +24,15 @@ class _dashboardState extends State<dashboard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      //backgroundColor: Colors.white,
       floatingActionButton: SizedBox(
         height: 75,
         width: 75,
         child: FloatingActionButton(
+          elevation: 2,
           onPressed: () { 
             Navigator.push(context, MaterialPageRoute(builder: (context)=> homescreen_ui()));
           },
-          //elevation: 0,
           child: Icon(Icons.camera_alt_outlined,size: 40,),
         ),
       ),
@@ -48,10 +48,7 @@ class _dashboardState extends State<dashboard> {
         ],
       ),
       appBar: AppBar(
-        title: Text("Fake Currency Detector",style: TextStyle(color: Colors.black26,fontSize: 25),),
-        centerTitle: true,
-        backgroundColor: Colors.white,
-        elevation: 0,
+        title: Text("Fake Currency Detector"),
       ),
       body: _selectedIndex==0?SingleChildScrollView(
         child: Container(
@@ -60,21 +57,33 @@ class _dashboardState extends State<dashboard> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                  //SizedBox(height: 40,),
+                // Container(
+                //   padding: EdgeInsets.only(left: 15,top: 0,right: 15,bottom: 0),
+                //     child: Text("Home",style: TextStyle(color: Colors.black,fontSize: 40))
+                // ),
+                SizedBox(height: 5,),
+                // Container(padding: EdgeInsets.symmetric(horizontal: 5),
+                // child: Container(height: 1,color: Colors.blueGrey,),),
+                SizedBox(height: 20,),
                 Container(
-                  padding: EdgeInsets.only(left: 10,top: 0,right: 10,bottom: 0),
-                    child: Text("Home",style: TextStyle(color: Colors.black,fontSize: 40))
+                    padding: EdgeInsets.only(left: 20,top: 0,right: 15,bottom: 0),
+                    child: Text("Saved Notes",style: TextStyle(color: Colors.black87,fontSize: 20))
                 ),
                 SizedBox(height: 10,),
-
                 Container(
-                 // padding: EdgeInsets.only(bottom: 100),
-                  height: MediaQuery.of(context).size.height * 0.8,
+                  padding: EdgeInsets.only(left: 10,right: 10),
+                  height: MediaQuery.of(context).size.height * 0.70,
                   child: ListView.builder(
-                      itemCount: 3,
+                      itemCount: 8,
                       itemBuilder: (context,index){
-                    return ListTile(
-                      leading: Icon(Icons.note),
-                      title: Text("Fake Note ${index+1}"),
+                    return Column(
+                      children: [
+                        ListTile(
+                          leading: Icon(Icons.note),
+                          title: Text("Fake Note ${index+1}"),
+                        ),
+                        Container(height: 0.2,color: Colors.black26,)
+                      ],
                     );
                   }),
                 ),
@@ -87,10 +96,10 @@ class _dashboardState extends State<dashboard> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            //SizedBox(height: 75,),
+            SizedBox(height: 25,),
             Container(
-                padding: EdgeInsets.only(left: 10,top: 0,right: 10,bottom: 0),
-                child: Text("News",style: TextStyle(color: Colors.black,fontSize: 40))
+                padding: EdgeInsets.only(left: 20,top: 0,right: 15,bottom: 0),
+                child: Text("Headlines",style: TextStyle(color: Colors.black87,fontSize: 20))
             ),
             SizedBox(height: 10,),
           ],

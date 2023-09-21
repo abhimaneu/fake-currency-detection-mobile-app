@@ -43,10 +43,13 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Fake Currency',
       theme: ThemeData(
-         colorScheme: ColorScheme.fromSeed(seedColor: Color(0xFFd88e7f)),
+        useMaterial3: true,
+         colorScheme: ColorScheme.fromSeed(
+             seedColor: Color(0xFF0A1944)
+         ),
          //useMaterial3: true,
         primarySwatch: colorCustom,
-        primaryColor: Colors.white,
+        primaryColor: Colors.white70,
         canvasColor: Colors.white70,
         // appBarTheme: AppBarTheme(
         //   shape: ContinuousRectangleBorder(
@@ -59,8 +62,9 @@ class MyApp extends StatelessWidget {
         //   centerTitle: true,
         // ),
           appBarTheme: AppBarTheme(
-              centerTitle: true,
-              backgroundColor: Colors.white,
+              centerTitle: false,
+              backgroundColor: Color(0xFF0A1944),
+              titleTextStyle: TextStyle(color: Colors.white70,fontSize: 25),
               elevation: 0,
             ),
 

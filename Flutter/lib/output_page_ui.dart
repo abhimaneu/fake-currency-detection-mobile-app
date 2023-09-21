@@ -47,14 +47,15 @@ class _output_page_uiState extends State<output_page_ui> {
       }
       percentage = (count / 10) * 100;
     }
+
     if(count>8){
-      percolor = Colors.green;
+      percolor = Color(0xFF688D71);
     }
     else if(count>6) {
       percolor = Colors.orange;
     }
     else {
-      percolor = Colors.red;
+      percolor = Color(0xFFC2350A);
     }
     setState(() {
       loading = false;
@@ -78,11 +79,10 @@ class _output_page_uiState extends State<output_page_ui> {
       //   title: Text("Fake Currency Detector",style: TextStyle(color: Colors.black87,),),
       // ),
       appBar: AppBar(
-        title: Text("Fake Currency Detector",style: TextStyle(color: Colors.black26,fontSize: 25),),
-        centerTitle: true,
+        title: Text("Fake Currency Detector"),
+
         automaticallyImplyLeading: false,
-        backgroundColor: Colors.white,
-        elevation: 0,
+
       ),
       body: loading?Center(child: CircularProgressIndicator()):Container(
         padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
@@ -93,26 +93,27 @@ class _output_page_uiState extends State<output_page_ui> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            //SizedBox(height: 20,),
+            SizedBox(height: 10,),
             Container(
-                padding: EdgeInsets.only(left: 10,top: 0,right: 10,bottom: 0),
+                padding: EdgeInsets.only(left: 15,top: 0,right: 15,bottom: 0),
                 child: Text("Result",style: TextStyle(color: Colors.black,fontSize: 35))
             ),
+            Container(height: 0.2,margin: EdgeInsets.symmetric(horizontal: 10,vertical: 10),color: Color(0xFF0A1944),),
             SizedBox(height: 20,),
             Center(
-              child: result=="PASS"?Text("Passed",style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold,color: Colors.green[700]),):Text("Failed",style: TextStyle(fontSize: 35,fontWeight: FontWeight.bold,color: Colors.red[700]),),
+              child: result=="PASS"?Text("Passed",style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold,color: Color(0xFF688D71)),):Text("Failed",style: TextStyle(fontSize: 35,fontWeight: FontWeight.bold,color: Color(0xFFC2350A)),),
             ),
             SizedBox(height: 5,),
             Center(
-              child: result=="PASS"?Text("This note is Genuine",style: TextStyle(fontSize: 15,fontWeight: FontWeight.normal,color: Colors.green[800]),):Text("There is a chance that the note is Fake",style: TextStyle(fontSize: 15,fontWeight: FontWeight.normal,color: Colors.deepOrangeAccent),),
+              child: result=="PASS"?Text("This note is Genuine",style: TextStyle(fontSize: 15,fontWeight: FontWeight.normal,color: Color(0xFF688D71)),):Text("There is a chance that the note is Fake",style: TextStyle(fontSize: 15,fontWeight: FontWeight.normal,color: Color(0xFFC2350A)),),
             ),
-            SizedBox(height: 10,),
+            SizedBox(height: 20,),
             Center(child: Container(
-              height: 250,
-              width: 320,
+              height: 200,
+              width: 340,
               decoration: BoxDecoration(
                 border: Border.all(
-                  color: Colors.yellow
+                  color: Color(0xFF0A1944)
                 ),
                 borderRadius: BorderRadius.all(Radius.circular(15))
               ),
@@ -123,12 +124,12 @@ class _output_page_uiState extends State<output_page_ui> {
             SizedBox(height: 20,),
 
             Container(
-              padding: EdgeInsets.only(left: 10,right: 10),
+              padding: EdgeInsets.only(left: 15,right: 15),
               child: Column(
                 children: [
                   Row(
                     children: [
-                      Text("    Final Score ",style: TextStyle(
+                      Text(" Final Score ",style: TextStyle(
                         fontSize: 20
                       ),),
                       //Text("80%",style: Theme.of(context).textTheme.displayMedium,),
@@ -145,8 +146,15 @@ class _output_page_uiState extends State<output_page_ui> {
                     circularStrokeCap: CircularStrokeCap.round,
                     center: Text("${(percentage/10).round()}/10",style: TextStyle(fontSize: 20),),
                     footer: Container(
-                        padding: EdgeInsets.only(top: 10,bottom: 10),
+                        padding: EdgeInsets.only(top: 15,bottom: 5),
                         child: Text("The Note passed ${percentage.toStringAsPrecision(2)}% of our Tests")),
+                  ),
+                  //SizedBox(height: 10,),
+                  TextButton(
+                    onPressed: () {
+
+                    },
+                    child: Text("View Detailed Report",style: TextStyle(fontSize: 12,color: Color(0xff3C4F6D),decoration: TextDecoration.underline),),
                   ),
                 ],
               ),
