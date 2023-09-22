@@ -1,3 +1,4 @@
+import 'package:cunning_document_scanner/cunning_document_scanner.dart';
 import 'package:fakecurrency/output_page_ui.dart';
 import 'package:fakecurrency/showimage.dart';
 import 'package:flutter/material.dart';

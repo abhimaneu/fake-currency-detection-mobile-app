@@ -41,6 +41,7 @@ dependencies:
   http: any
   percent_indicator: ^4.2.3
   google_fonts: ^6.0.0
+  cunning_document_scanner: ^1.1.2
 
 
 dev_dependencies:
