@@ -3,7 +3,7 @@ import 'package:camera/camera.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 
-import 'home_screen.dart';
+import 'home_screen_ui.dart';
 
 class showimage extends StatefulWidget {
   const showimage({Key? key}) : super(key: key);

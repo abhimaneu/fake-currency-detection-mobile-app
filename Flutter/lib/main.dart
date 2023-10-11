@@ -1,5 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fakecurrency/dashboard.dart';
-import 'package:fakecurrency/home_screen.dart';
 import 'package:fakecurrency/output_page_ui.dart';
 import 'package:fakecurrency/showimage.dart';
 import 'package:flutter/material.dart';
@@ -7,9 +7,10 @@ import 'package:camera/camera.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
-import 'api.dart';
 
 import 'package:fakecurrency/home_screen_ui.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
 Map<int, Color> color =
 {
@@ -25,9 +26,14 @@ Map<int, Color> color =
   900:Color.fromRGBO(136,14,79, 1),
 };
 MaterialColor colorCustom = MaterialColor(0xFFf8b195, color);
+var firebaseDB;
 
-void main() {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  firebaseDB = FirebaseFirestore.instance;
   runApp(const MyApp());
 }
 

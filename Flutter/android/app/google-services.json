@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "650955939778",
+    "project_id": "godseye-85466",
+    "storage_bucket": "godseye-85466.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:650955939778:android:2107d36580fc514142005b",
+        "android_client_info": {
+          "package_name": "com.example.fakecurrency"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBnOdOIj2MWzLE0f5gjlayhHWMlwkVtCWg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

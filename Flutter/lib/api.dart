@@ -8,7 +8,7 @@ import 'package:http/http.dart' as http;
 Future Getdata(url) async {
 
 
-    return http.get(Uri.parse('https://godseye.pythonanywhere.com/api'));
+    return http.get(Uri.parse(url));
 
 
 }

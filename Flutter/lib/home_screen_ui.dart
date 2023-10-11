@@ -1,9 +1,12 @@
-import 'package:cunning_document_scanner/cunning_document_scanner.dart';
+import 'package:fakecurrency/imagecrop_service.dart';
 import 'package:fakecurrency/output_page_ui.dart';
 import 'package:fakecurrency/showimage.dart';
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:image_cropper/image_cropper.dart';
+
+import 'package:firebase_storage/firebase_storage.dart';
 import 'dart:io';
 
 List<CameraDescription>? cameras; //list out the camera available
@@ -217,7 +220,9 @@ class _homescreen_uiState extends State<homescreen_ui> {
                                   },
                                   icon: flashIcon[_flashStatus]),
                               IconButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
                                 icon: Icon(
                                   Icons.close,
                                   color: Colors.white,
@@ -243,6 +248,7 @@ class _homescreen_uiState extends State<homescreen_ui> {
                                         CrossAxisAlignment.center,
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
+                                      SizedBox(height: 160,),
                                       CustomPaint(
                                         foregroundPainter: BorderPainter(),
                                         child: Container(
@@ -251,16 +257,13 @@ class _homescreen_uiState extends State<homescreen_ui> {
                                           height: 200,
                                         ),
                                       ),
-                                      SizedBox(
-                                        height: 20,
-                                      ),
-                                      Text(
-                                        "Make Sure the Currency is Aligned properly",
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.bold),
-                                      ),
+                                      // Text(
+                                      //   "Make Sure the Currency is Aligned properly",
+                                      //   style: TextStyle(
+                                      //       color: Colors.white,
+                                      //       fontSize: 12,
+                                      //       fontWeight: FontWeight.bold),
+                                      // ),
                                     ],
                                   )),
                                 ),
@@ -288,13 +291,16 @@ class _homescreen_uiState extends State<homescreen_ui> {
                                                       await picker.pickImage(
                                                           source: ImageSource
                                                               .gallery);
+                                                  image = await ImageCrop_Service().pickCropImage(
+                                                    cropAspectRatio: CropAspectRatio(ratioX: 16, ratioY: 9),
+                                                  );
                                                   if (image != null) {
                                                     setState(() {
-                                                      Navigator.push(
+                                                      Navigator.pushReplacement(
                                                           context,
                                                           MaterialPageRoute(
                                                               builder: (context) =>
-                                                                  showimage()));
+                                                                  output_page_ui()));
                                                     });
                                                   }
                                                 },
@@ -308,8 +314,11 @@ class _homescreen_uiState extends State<homescreen_ui> {
                                               onTap: () async {
                                                 image = await controller!
                                                     .takePicture(); //capture image
+                                                image = await ImageCrop_Service().pickCropImage(
+                                                  cropAspectRatio: CropAspectRatio(ratioX: 16, ratioY: 9),
+                                                );
                                                 controller?.setFlashMode(FlashMode.off);
-                                                Navigator.of(context).push(
+                                                Navigator.of(context).pushReplacement(
                                                     MaterialPageRoute(
                                                         builder: (context) =>
                                                             output_page_ui()));
