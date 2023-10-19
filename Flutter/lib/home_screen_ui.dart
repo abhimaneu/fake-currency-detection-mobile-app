@@ -3,6 +3,7 @@ import 'package:fakecurrency/output_page_ui.dart';
 import 'package:fakecurrency/showimage.dart';
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
+import 'package:group_button/group_button.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:image_cropper/image_cropper.dart';
 
@@ -13,6 +14,7 @@ List<CameraDescription>? cameras; //list out the camera available
 CameraController? controller; //controller for camera
 XFile? image; //for caputred image
 ImagePicker picker = ImagePicker();
+int mode = 0;
 
 class homescreen_ui extends StatefulWidget {
   const homescreen_ui({Key? key}) : super(key: key);
@@ -116,6 +118,12 @@ class _homescreen_uiState extends State<homescreen_ui> {
   int cameraFlag = 0;
   int _flashStatus = 0;
 
+  final List<String> notes = [
+    "100",
+    "500",
+  ];
+
+
   @override
   void initState() {
     super.initState();
@@ -203,13 +211,6 @@ class _homescreen_uiState extends State<homescreen_ui> {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               IconButton(
-                                onPressed: () {},
-                                icon: Icon(
-                                  Icons.help_outline,
-                                  color: Colors.white,
-                                ),
-                              ),
-                              IconButton(
                                   onPressed: () {
                                     setState(() {
                                       //FLASH TOGGLE
@@ -279,8 +280,18 @@ class _homescreen_uiState extends State<homescreen_ui> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.center,
                                       mainAxisAlignment:
-                                          MainAxisAlignment.center,
+                                          MainAxisAlignment.spaceEvenly,
                                       children: [
+                                        GroupButton(
+                                          options: GroupButtonOptions(
+                                            borderRadius: BorderRadius.circular(100),
+                                            selectedColor: Colors.blueGrey,
+                                            buttonHeight: 35,
+                                          ),
+                                          onSelected: (val, i, selected) =>
+                                              mode = i+1,
+                                          isRadio: true,
+                                          buttons: ["100", "500"],),
                                         Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceEvenly,

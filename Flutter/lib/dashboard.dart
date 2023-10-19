@@ -6,6 +6,8 @@ import 'package:camera/camera.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 
+import 'package:url_launcher/url_launcher.dart';
+
 class dashboard extends StatefulWidget {
   const dashboard({Key? key}) : super(key: key);
 
@@ -52,6 +54,7 @@ class _dashboardState extends State<dashboard> {
       ),
       body: _selectedIndex==0?SingleChildScrollView(
         child: Container(
+          padding: EdgeInsets.symmetric(horizontal: 10),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -66,27 +69,43 @@ class _dashboardState extends State<dashboard> {
                 // child: Container(height: 1,color: Colors.blueGrey,),),
                 SizedBox(height: 20,),
                 Container(
-                    padding: EdgeInsets.only(left: 20,top: 0,right: 15,bottom: 0),
-                    child: Text("Saved Notes",style: TextStyle(color: Colors.black87,fontSize: 20))
+                    padding: EdgeInsets.only(left: 10,top: 0,right: 15,bottom: 0),
+                    child: Text("Welcome",style: TextStyle(color: Colors.black87,fontSize: 30))
                 ),
                 SizedBox(height: 10,),
-                Container(
-                  padding: EdgeInsets.only(left: 10,right: 10),
-                  height: MediaQuery.of(context).size.height * 0.70,
-                  child: ListView.builder(
-                      itemCount: 8,
-                      itemBuilder: (context,index){
-                    return Column(
-                      children: [
-                        ListTile(
-                          leading: Icon(Icons.note),
-                          title: Text("Fake Note ${index+1}"),
-                        ),
-                        Container(height: 0.2,color: Colors.black26,)
-                      ],
-                    );
-                  }),
+                SizedBox(height: 10,),
+                Text(
+                  "        Detect counterfeit currency with ease using our advanced image analysis technology. Simply snap a picture of a banknote, and our app will quickly assess its authenticity. Stay informed with real-time currency news and exchange rates. Explore educational resources and protect your finances. Your security is our priority.",
+                  style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400),textAlign: TextAlign.justify,
                 ),
+                SizedBox(height: 20,),
+                Text("How to Use?",
+                  style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),
+                ),
+                SizedBox(height: 10,),
+                Text("\u2022 Click On Camera icon Below",style: TextStyle(fontSize: 16),textAlign: TextAlign.justify),
+                SizedBox(height: 5,),
+                Text("\u2022 Select the note you want to scan",style: TextStyle(fontSize: 16),),
+                SizedBox(height: 5,),
+                Text("\u2022 Take a clear picture of the note using the camera or form Gallery",style: TextStyle(fontSize: 16),textAlign: TextAlign.justify),
+                Container(padding: EdgeInsets.only(left: 15),
+                  child: Text("Make Sure the banknote is flat, without any creases or folds, to capture a clear and accurate image",
+                    style: TextStyle(fontSize: 16,color: Colors.grey[600]),textAlign: TextAlign.justify,),
+                ),
+                SizedBox(height: 5,),
+                Text("\u2022 Crop the image of the banknote to ensure no background is there , this will help get accurate results",style: TextStyle(fontSize: 16),textAlign: TextAlign.justify),
+                SizedBox(height: 5,),
+                Text("\u2022 You can see the result after the Note has been checked",style: TextStyle(fontSize: 16),textAlign: TextAlign.justify),
+                SizedBox(height: 20,),
+
+                Text("Things to Note:",
+                  style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),
+                ),
+                SizedBox(height: 10,),
+                Text("\u2022 The Result will show a score out of 10 based on the analysis, If the note meet the minimum score it will be considered Pass else Fail",style: TextStyle(fontSize: 16),textAlign: TextAlign.justify),
+                SizedBox(height: 5,),
+                Text("\u2022 Make Sure not to use the app for any Immoral purposes",style: TextStyle(fontSize: 16),textAlign: TextAlign.justify),
+
               ],
 
           ),
@@ -99,9 +118,94 @@ class _dashboardState extends State<dashboard> {
             SizedBox(height: 25,),
             Container(
                 padding: EdgeInsets.only(left: 20,top: 0,right: 15,bottom: 0),
-                child: Text("Headlines",style: TextStyle(color: Colors.black87,fontSize: 20))
+                child: Text("Headlines",style: TextStyle(color: Colors.black87,fontSize: 30))
             ),
             SizedBox(height: 10,),
+            Column(
+              children: [
+                SizedBox(height: 10,),
+                GestureDetector(
+
+                  child: Container(
+                    width: MediaQuery.of(context).size.width,
+                    padding: EdgeInsets.all(10),
+                    child: Row(
+                      children: [
+                        Image.network("https://c.ndtvimg.com/2023-10/7oddbbk8_web-series-farziinspired-fake-currency-racket-busted-in-delhi-5-arrested_120x90_07_October_23.jpg",height: 100,),
+                        SizedBox(width: 10,),
+                        Flexible(child: Text("Web Series 'Farzi'-Inspired Fake Currency Racket Busted In Delhi, 5 Arrested",style: TextStyle(
+                          fontWeight: FontWeight.bold
+                        ),)),
+                      ],
+                    ),
+                  ),
+                ),
+
+                //NEWS 2
+                Container(
+                  width: MediaQuery.of(context).size.width,
+                  padding: EdgeInsets.all(10),
+                  child: Row(
+                    children: [
+                      Image.network("https://c.ndtvimg.com/2023-02/p5saa8sg_rupees-500-and-100-indian-currency-notes_120x90_24_February_23.jpg",height: 100,),
+                      SizedBox(width: 10,),
+                      Flexible(child: Text("Fake Currency Racket Busted, 3 Arrested In Assam",style: TextStyle(
+                          fontWeight: FontWeight.bold
+                      ),)),
+                    ],
+                  ),
+                ),
+
+                //NEWS 3
+                Container(
+                  width: MediaQuery.of(context).size.width,
+                  padding: EdgeInsets.all(10),
+                  child: Row(
+                    children: [
+                      Image.network("https://i.ndtvimg.com/i/2016-06/court-generic_240x180_51465821016.jpg",height: 100,),
+                      SizedBox(width: 10,),
+                      Flexible(child: Text("Anti-Terror Agency Court Convicts 6th Accused In Bengaluru Fake Currency Case",style: TextStyle(
+                          fontWeight: FontWeight.bold
+                      ),)),
+
+
+                    ],
+                  ),
+                ),
+
+                // Container(
+                //   width: MediaQuery.of(context).size.width,
+                //   padding: EdgeInsets.all(10),
+                //   child: Row(
+                //     children: [
+                //       Image.network("https://i.ndtvimg.com/i/2016-06/court-generic_240x180_51465821016.jpg",height: 100,),
+                //       SizedBox(width: 10,),
+                //       Flexible(child: Text("Anti-Terror Agency Court Convicts 6th Accused In Bengaluru Fake Currency Case",style: TextStyle(
+                //           fontWeight: FontWeight.bold
+                //       ),)),
+                //
+                //
+                //     ],
+                //   ),
+                // ),
+                //
+                // Container(
+                //   width: MediaQuery.of(context).size.width,
+                //   padding: EdgeInsets.all(10),
+                //   child: Row(
+                //     children: [
+                //       Image.network("https://c.ndtvimg.com/2023-07/6il7avjg_manav-arora_120x90_09_July_23.jpg",height: 100,),
+                //       SizedBox(width: 10,),
+                //       Flexible(child: Text("Doctor Gets Fake Rs 500 Note From Patient, Shares How He Was 'Conned'",style: TextStyle(
+                //           fontWeight: FontWeight.bold
+                //       ),)),
+                //
+                //
+                //     ],
+                //   ),
+                // ),
+              ],
+            )
           ],
         ),
       )

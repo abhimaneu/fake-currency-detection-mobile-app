@@ -7,6 +7,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'dart:io';
@@ -66,7 +67,7 @@ class _output_page_uiState extends State<output_page_ui> {
     print(urlDownload);
 
     //CALLING API
-    var fetchurl = url + '?img=${urlDownload}';
+    var fetchurl = url + '?img=${urlDownload}' + '&opt=${mode}';
     print(fetchurl);
     // try {
     Data = await Getdata(fetchurl);
@@ -120,10 +121,29 @@ class _output_page_uiState extends State<output_page_ui> {
         automaticallyImplyLeading: false,
       ),
       body: loading
-          ? Center(child: CircularProgressIndicator())
+          ? Center(
+            child: Container(
+          width: 150,
+            height: 250,
+            child:Column(
+        children: [
+            Animate(
+              effects: [
+                FadeEffect(),ScaleEffect()
+              ],
+              child:  Image.asset('icons/coinloading.gif').animate(onPlay: (controller) => controller.repeat(reverse: true))
+                  .fadeOut(curve: Curves.fastOutSlowIn,duration: 1000.ms)
+                  .swap(duration: 1000.ms, builder: (_, __) => Image.asset('icons/indian-rupee single black.png'))
+
+            ),
+          Text("Analysing Note",style: TextStyle(fontSize: 15),),
+
+        ],
+      )),
+          )
           : count == 0
               ? Center(
-                  child: Text("Please reupload Note Image"),
+                  child: Text("Please Reupload Note Image"),
                 )
               : SingleChildScrollView(
                   child: Container(

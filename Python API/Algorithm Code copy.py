@@ -737,7 +737,7 @@ def testing_500():
         img, line_count = left_BL_result[:]
 
         # The feature passes the test if number of bleed lines is close to 7 (6.7 - 7.6)
-        if line_count >= 4.7 and line_count <= 5.6:
+        if line_count >= 3.7 and line_count <= 4.6:
             status = True
             successful_features_count += 1
             print('Feature 8: Successful- 5 bleed lines found in left part of currency note')
@@ -763,7 +763,7 @@ def testing_500():
         img, line_count = right_BL_result[:]
 
         # The feature passes the test if number of bleed lines is close to 7 (6.7 - 7.6)
-        if line_count >= 4.7 and line_count <= 5.6:
+        if line_count >= 3.7 and line_count <= 4.6:
             status = True
             successful_features_count += 1
             print('Feature 9: Successful- 5 bleed lines found in right part of currency note')
