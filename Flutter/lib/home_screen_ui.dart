@@ -14,7 +14,7 @@ List<CameraDescription>? cameras; //list out the camera available
 CameraController? controller; //controller for camera
 XFile? image; //for caputred image
 ImagePicker picker = ImagePicker();
-int mode = 0;
+int mode = 3;
 
 class homescreen_ui extends StatefulWidget {
   const homescreen_ui({Key? key}) : super(key: key);
@@ -291,7 +291,7 @@ class _homescreen_uiState extends State<homescreen_ui> {
                                           onSelected: (val, i, selected) =>
                                               mode = i+1,
                                           isRadio: true,
-                                          buttons: ["100", "500"],),
+                                          buttons: ["100","200","500"],),
                                         Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceEvenly,
